@@ -9,5 +9,16 @@ package Usuarios;
  * @author leonel
  */
 public class Vehiculo {
-    
+
+    private String placa;
+    private String modelo;
+    private String marca;
+    private Vehiculo TipoVehiculo;
+
+    public Vehiculo(String placa, String modelo, String marca, Vehiculo TipoVehiculo) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.TipoVehiculo = TipoVehiculo;
+    }
 }
