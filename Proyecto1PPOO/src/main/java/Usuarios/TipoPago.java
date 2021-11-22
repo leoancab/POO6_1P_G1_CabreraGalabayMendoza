@@ -9,7 +9,6 @@ package Usuarios;
  *
  * @author cgala
  */
-public enum Estado {
-    Disponible, Ocupado;
-    
+public enum TipoPago {
+    EFECTIVO, CREDITO;
 }

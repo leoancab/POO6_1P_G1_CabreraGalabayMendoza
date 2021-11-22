@@ -4,11 +4,13 @@
  */
 package Usuarios;
 
+import Servicios.Servicio;
+
 /**
  *
  * @author leonel
  */
-public class Pago extends Cliente {
+public class Pago {
 
     private Cliente cliente;
     private Servicio servicio;

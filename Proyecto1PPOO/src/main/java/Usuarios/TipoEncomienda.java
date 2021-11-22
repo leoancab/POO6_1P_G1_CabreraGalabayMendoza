@@ -9,5 +9,5 @@ package Usuarios;
  * @author leonel
  */
 public enum TipoEncomienda {
-    Documento, Medicamento, Ropa;
+    DOCUMENTO, MEDICAMENTO, ROPA;
 }

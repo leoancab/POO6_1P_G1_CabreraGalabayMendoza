@@ -9,5 +9,5 @@ package Usuarios;
  * @author leonel
  */
 public enum TipoEstado {
-    Disponible, Ocupado;
+    DISPONIBLE, OCUPADO;
 }
