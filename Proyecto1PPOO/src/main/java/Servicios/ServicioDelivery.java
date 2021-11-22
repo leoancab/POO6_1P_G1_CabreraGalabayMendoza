@@ -1,3 +1,11 @@
+package Servicios;
+
+import Restaurantes.Pedido;
+import Usuarios.Ruta;
+import Usuarios.TipoPago;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,7 +21,7 @@ public class ServicioDelivery extends Servicio{
     private Pedido pedido;
     private String nPlatos;
     
-    public Servicio(Ruta ruta, Date fecha,Hour hora, String tipoDePago,
+    public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago,
             int identificador, int nPasajeros, Pedido pedido, String nPlatos){
     super(ruta,fecha,hora,tipoDePago,identificador);
     this.pedido = pedido;
