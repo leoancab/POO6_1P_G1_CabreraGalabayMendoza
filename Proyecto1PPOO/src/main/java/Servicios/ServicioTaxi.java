@@ -1,5 +1,6 @@
 package Servicios;
 import Usuarios.Ruta;
+import Usuarios.Conductor;
 import Usuarios.TipoPago;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -29,8 +30,8 @@ public class ServicioTaxi extends Servicio{
     public void setRuta(int nPasajeros) {
         this.nPasajeros = nPasajeros;
     }
-
     
-    
-    
+    public Conductor seleccionarConductor() {
+        
+    }
 }
