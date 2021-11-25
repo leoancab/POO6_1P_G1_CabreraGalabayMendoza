@@ -17,6 +17,10 @@ public class Cliente extends Usuario{
     Scanner sc = new Scanner(System.in);
     private int num_tarjeta_credito;
     private int edad;
+<<<<<<< HEAD
+=======
+    private Conductor conductor;
+>>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
     
 
     public Cliente(int num_tarjeta_credito, int edad, String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
@@ -130,12 +134,19 @@ public class Cliente extends Usuario{
         
         Ruta ruta = new Ruta(inicio, fin);
         
+<<<<<<< HEAD
         System.out.println("Desea confirmar su viaje? (SI/NO)");
         
         String confrimar  = sc.nextLine().toLowerCase();
         
         ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
 
+=======
+        ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros, conductor);
+        if (tipo_pago.equalsIgnoreCase("Tarjeta de credito")) {
+            double valor_pagar = servico_taxi.calcular_precio();
+        }
+>>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
     }
     
     public void solicitarEcomienda() {

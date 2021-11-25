@@ -1,6 +1,9 @@
 package Servicios;
 import Usuarios.Ruta;
+<<<<<<< HEAD:Proyecto1PPOO/src/main/java/Servicios/ServicioTaxi.java
 import Usuarios.Conductor;
+=======
+>>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae:Proyecto1PPOO/src/main/java/ServicioTaxi.java
 import Usuarios.TipoPago;
 import java.time.LocalDate;
 import java.time.LocalTime;
