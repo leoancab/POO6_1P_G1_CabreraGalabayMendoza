@@ -6,19 +6,21 @@ package Restaurantes;
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+
 /**
  *
  * @author Marti
  */
 public class Pedido {
+
     private ArrayList<Comida> opSeleccionadas;
-    
-    public Pedido( ArrayList<Comida> opSeleccionadas){
+
+    public Pedido(ArrayList<Comida> opSeleccionadas) {
         this.opSeleccionadas = opSeleccionadas;
     }
-    
+
     public ArrayList<Comida> getOpSeleccioandas() {
-       return opSeleccionadas;
+        return opSeleccionadas;
     }
 
     public void setOpSeleccionadas(ArrayList<Comida> opSeleccionadas) {

@@ -17,5 +17,4 @@ public class Ruta {
         this.salida = salida;
         this.destino = destino;
     }
-
 }

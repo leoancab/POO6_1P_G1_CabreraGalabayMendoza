@@ -10,6 +10,7 @@ package Usuarios;
  * @author cgala
  */
 public abstract class Usuario {
+
     protected String num_cedula;
     protected String nombre;
     protected String apellido;
@@ -25,9 +26,7 @@ public abstract class Usuario {
         this.contraseña = contraseña;
         this.cedula = cedula;
     }
-    
-    
-    
+
     protected abstract void consultarServicio();
-                
+
 }

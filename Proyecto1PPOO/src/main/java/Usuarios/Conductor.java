@@ -9,7 +9,8 @@ package Usuarios;
  *
  * @author cgala
  */
-public class Conductor extends Usuario{
+public class Conductor extends Usuario {
+
     private int num_lic;
     private Estado estado;
     private Vehiculo vehiculo;
@@ -20,7 +21,7 @@ public class Conductor extends Usuario{
         this.estado = estado;
         this.vehiculo = vehiculo;
     }
-           
+
     //Getters
     public int getNum_lic() {
         return num_lic;
@@ -57,7 +58,7 @@ public class Conductor extends Usuario{
     public String getCedula() {
         return cedula;
     }
-    
+
     //Setters
     public void setNum_lic(int num_lic) {
         this.num_lic = num_lic;
@@ -94,11 +95,10 @@ public class Conductor extends Usuario{
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-    
+
     //Metodos
     @Override
     public void consultarServicio() {
         //Code here.
     }
-    
 }
