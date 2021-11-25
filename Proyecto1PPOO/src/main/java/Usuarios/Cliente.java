@@ -242,9 +242,9 @@ public class Cliente extends Usuario {
         
 
         System.out.println("Restaurantes disponibles: ");
-        //for (int i = 0; i < menu.size(); i++) {
-        System.out.println(menu.getNombre());
-        //}
+        for (int i = 0; i < menu.size(); i++) {
+            System.out.println(menu.getNombre());
+        }
     }
 
 }
