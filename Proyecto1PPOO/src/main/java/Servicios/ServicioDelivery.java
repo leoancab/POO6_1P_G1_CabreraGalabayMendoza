@@ -19,10 +19,10 @@ import java.time.LocalTime;
 public class ServicioDelivery extends Servicio{
     
     private Pedido pedido;
-    private String nPlatos;
+    private int nPlatos;
     
     public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago,
-            int identificador, int nPasajeros, Pedido pedido, String nPlatos){
+            int identificador, Pedido pedido, int nPlatos){
     super(ruta,fecha,hora,tipoDePago,identificador);
     this.pedido = pedido;
     this.nPlatos = nPlatos;
@@ -36,11 +36,11 @@ public class ServicioDelivery extends Servicio{
         this.pedido = pedido;
     }
     
-    public String getNPlatos() {
+    public int getNPlatos() {
         return nPlatos;
     }
 
-    public void setNPlatos(String nPlatos) {
+    public void setNPlatos(int nPlatos) {
         this.nPlatos = nPlatos;
     }
     

@@ -2,6 +2,7 @@ package Servicios;
 
 import Usuarios.Ruta;
 import Usuarios.TipoPago;
+import Usuarios.TipoEncomienda;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -17,11 +18,11 @@ import java.time.LocalTime;
  */
 public class ServicioEncomienda extends Servicio {
     private int nServicio;
-    private String tipoEncomienda;
+    private TipoEncomienda tipoEncomienda;
     private int cantProd;
     
     public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago,int identificador, 
-            int nServicio, String tipoEncomienda, int cantProd ){
+            int nServicio, TipoEncomienda tipoEncomienda, int cantProd ){
         super(ruta,fecha,hora,tipoDePago,identificador);
         this.nServicio = nServicio;
         this.tipoEncomienda = tipoEncomienda;
@@ -37,11 +38,11 @@ public class ServicioEncomienda extends Servicio {
      
     }
     
-    public String getTipoEncomienda() {
+    public TipoEncomienda getTipoEncomienda() {
         return tipoEncomienda;
     }
 
-    public void setNServicio(String tipoEncomienda) {
+    public void setNServicio(TipoEncomienda tipoEncomienda) {
         this.tipoEncomienda = tipoEncomienda;
      
     }
