@@ -1,6 +1,7 @@
 package Servicios;
 
 import Usuarios.Ruta;
+import Usuarios.TipoEncomienda;
 import Usuarios.TipoPago;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,10 +21,10 @@ public class ServicioEncomienda extends Servicio {
     private String tipoEncomienda;
     private int cantProd;
 
-    public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, int identificador, int nServicio, String tipoEncomienda, int cantProd) {
+    public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, 
+            TipoPago tipoDePago, int identificador, int nServicio, TipoEncomienda tipoEncomienda, int cantProd) {
         super(ruta, fecha, hora, tipoDePago, identificador);
         this.nServicio = nServicio;
-        this.tipoEncomienda = tipoEncomienda;
         this.cantProd = cantProd;
     }
 

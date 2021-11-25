@@ -19,12 +19,10 @@ public class Cliente extends Usuario {
     Scanner sc = new Scanner(System.in);
     private int num_tarjeta_credito;
     private int edad;
-    <<<<<<< HEAD
-    =======
     private Conductor conductor;
-    >>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
 
-    public Cliente(int num_tarjeta_credito, int edad, String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
+    public Cliente(int num_tarjeta_credito, int edad, String num_cedula,
+            String nombre, String apellido, String user, String contraseña, String cedula) {
         super(num_cedula, nombre, apellido, user, contraseña, cedula);
         this.num_tarjeta_credito = num_tarjeta_credito;
         this.edad = edad;
@@ -138,16 +136,79 @@ public class Cliente extends Usuario {
 
         String confirmar = sc.nextLine().toLowerCase();
 
-        ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
+        if (confirmar.equals("si")) {
+            ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
 
-        //ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
-        if (tipo_pago.equalsIgnoreCase("Tarjeta de credito")) {
-            double valor_pagar = servico_taxi.calcular_precio();
+            if (tipo_pago.equals("2")) {
+                double valor_pagar = servicio_taxi.calcularPrecio(tipo);
+            }
         }
     }
 
     public void solicitarEcomienda() {
-        //Code here.
+        System.out.println("**********Detalles de la ruta**********");
+        System.out.println("Ingrese su ubicacion actual: ");
+        String inicio = sc.nextLine();
+
+        System.out.println("Ingrese su destino:");
+        String fin = sc.nextLine();
+
+        LocalDate fecha = LocalDate.now();
+        System.out.println("Fecha actual: " + fecha);
+
+        LocalTime hora = LocalTime.now();
+        System.out.println("Hora del viaje: " + hora);
+
+        System.out.println("Seleccione el tipo de pago (1 - 2):"
+                + "1. Efectivo"
+                + "2. Tarjeta de credito");
+        String tipo_pago = sc.nextLine();
+
+        TipoPago tipo = null;
+
+        if (tipo_pago.equals("1")) {
+            tipo = TipoPago.EFECTIVO;
+        } else {
+            tipo = TipoPago.CREDITO;
+        }
+
+        System.out.println("Seleccione el tipo de encomienda (1 - 2 - 3):"
+                + "1. Documento"
+                + "2. Medicamento"
+                + "3. Ropa");
+        String tipo_enc = sc.nextLine();
+
+        TipoEncomienda enco = null;
+
+        switch (tipo_enc) {
+            case "1":
+                enco = TipoEncomienda.DOCUMENTO;
+                break;
+            case "2":
+                enco = TipoEncomienda.MEDICAMENTO;
+                break;
+            default:
+                enco = TipoEncomienda.ROPA;
+                break;
+        }
+
+        System.out.println("Ingrese la cantidad del productos: ");
+        int cant_prod = sc.nextInt();
+        sc.nextLine();
+
+        Ruta ruta = new Ruta(inicio, fin);
+
+        System.out.println("Desea confirmar su viaje? (SI/NO)");
+
+        String confirmar = sc.nextLine().toLowerCase();
+
+        if (confirmar.equals("si")) {
+            ServicioEncomienda serv_enc = new ServicioEncomienda(ruta, fecha, hora, tipo, 15231, 25695, enco, cant_prod);
+
+            if (tipo_pago.equals("2")) {
+                double valor_pagar = serv_enc.calcularPrecio(tipo);
+            }
+        }
     }
 
     public void solicitarDelivery() {

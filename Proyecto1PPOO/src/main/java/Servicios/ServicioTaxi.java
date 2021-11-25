@@ -19,7 +19,8 @@ public class ServicioTaxi extends Servicio {
 
     private int nPasajeros;
 
-    public ServicioTaxi(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, int identificador, int nPasajeros) {
+    public ServicioTaxi(Ruta ruta, LocalDate fecha, LocalTime hora, 
+            TipoPago tipoDePago, int identificador, int nPasajeros) {
         super(ruta, fecha, hora, tipoDePago, identificador);
         this.nPasajeros = nPasajeros;
     }
