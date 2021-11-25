@@ -9,12 +9,12 @@
  * @author cgala
  */
 public class Sistema {
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hola mundo");
+        
     }
 
 }

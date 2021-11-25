@@ -5,10 +5,13 @@
  */
 package Usuarios;
 
+//import Restaurantes.Comida;
 import Servicios.*;
+import Restaurantes.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -146,7 +149,6 @@ public class Cliente extends Usuario {
     }
 
     public void solicitarEcomienda() {
-        System.out.println("**********Detalles de la ruta**********");
         System.out.println("Ingrese su ubicacion actual: ");
         String inicio = sc.nextLine();
 
@@ -212,7 +214,37 @@ public class Cliente extends Usuario {
     }
 
     public void solicitarDelivery() {
-        //Code here.
+        System.out.println("Ingrese su ubicacion actual: ");
+        String inicio = sc.nextLine();
+
+        System.out.println("Ingrese su destino:");
+        String fin = sc.nextLine();
+
+        LocalDate fecha = LocalDate.now();
+        System.out.println("Fecha actual: " + fecha);
+
+        LocalTime hora = LocalTime.now();
+        System.out.println("Hora del viaje: " + hora);
+
+        System.out.println("Seleccione el tipo de pago (1 - 2):"
+                + "1. Efectivo"
+                + "2. Tarjeta de credito");
+        String tipo_pago = sc.nextLine();
+
+        TipoPago tipo = null;
+
+        if (tipo_pago.equals("1")) {
+            tipo = TipoPago.EFECTIVO;
+        } else {
+            tipo = TipoPago.CREDITO;
+        }
+        
+        
+
+        System.out.println("Restaurantes disponibles: ");
+        //for (int i = 0; i < menu.size(); i++) {
+        System.out.println(menu.getNombre());
+        //}
     }
 
 }

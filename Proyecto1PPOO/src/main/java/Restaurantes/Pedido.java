@@ -19,7 +19,7 @@ public class Pedido {
         this.opSeleccionadas = opSeleccionadas;
     }
 
-    public ArrayList<Comida> getOpSeleccioandas() {
+    public ArrayList<Comida> getOpSeleccionadas() {
         return opSeleccionadas;
     }
 
