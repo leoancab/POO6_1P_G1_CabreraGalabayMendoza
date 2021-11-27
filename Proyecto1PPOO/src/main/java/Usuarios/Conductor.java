@@ -15,7 +15,8 @@ public class Conductor extends Usuario {
     private Estado estado;
     private Vehiculo vehiculo;
 
-    public Conductor(int num_lic, Estado estado, Vehiculo vehiculo, String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
+    public Conductor(int num_lic, Estado estado, Vehiculo vehiculo, 
+            String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
         super(num_cedula, nombre, apellido, user, contraseña, cedula);
         this.num_lic = num_lic;
         this.estado = estado;

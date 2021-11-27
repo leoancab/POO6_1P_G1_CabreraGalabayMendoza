@@ -238,12 +238,18 @@ public class Cliente extends Usuario {
         } else {
             tipo = TipoPago.CREDITO;
         }
-        
-        
 
         System.out.println("Restaurantes disponibles: ");
-        for (int i = 0; i < menu.size(); i++) {
-            System.out.println(menu.getNombre());
+        for (int i = 0; i < restaurantes.size(); i++) {
+            System.out.println(Restaurante.get(i).getNombre());
+        }
+        System.out.println("Ingrese nombre de restaurante a elegir: ");
+        String rest = sc.nextLine();
+
+        for (int i = 0; i < restaurantes.size(); i++) {
+            if (restaurantes.get(i).getNombre().equals(rest)) {
+                System.out.println(restaurantes.get(i).getMenu());
+            }
         }
     }
 
