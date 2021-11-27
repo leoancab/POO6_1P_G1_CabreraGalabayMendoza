@@ -19,5 +19,4 @@ public class Pago {
         this.cliente = cliente;
         this.servicio = servicio;
     }
-
 }

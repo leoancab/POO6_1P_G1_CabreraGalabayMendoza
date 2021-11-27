@@ -11,5 +11,4 @@ package Usuarios;
  */
 public enum Estado {
     Disponible, Ocupado;
-    
 }

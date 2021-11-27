@@ -4,31 +4,41 @@
  * and open the template in the editor.
  */
 package Usuarios;
+
+//import Restaurantes.Comida;
 import Servicios.*;
+import Restaurantes.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  *
  * @author cgala
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario {
+
     Scanner sc = new Scanner(System.in);
     private int num_tarjeta_credito;
     private int edad;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     private Conductor conductor;
 >>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
     
+=======
+    private Conductor conductor;
+>>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
 
-    public Cliente(int num_tarjeta_credito, int edad, String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
+    public Cliente(int num_tarjeta_credito, int edad, String num_cedula,
+            String nombre, String apellido, String user, String contraseña, String cedula) {
         super(num_cedula, nombre, apellido, user, contraseña, cedula);
         this.num_tarjeta_credito = num_tarjeta_credito;
         this.edad = edad;
     }
-    
+
     //Getters
     public int getNum_tarjeta_credito() {
         return num_tarjeta_credito;
@@ -61,7 +71,7 @@ public class Cliente extends Usuario{
     public String getCedula() {
         return cedula;
     }
-    
+
     //Setters
     public void setNum_tarjeta_credito(int num_tarjeta_credito) {
         this.num_tarjeta_credito = num_tarjeta_credito;
@@ -94,67 +104,181 @@ public class Cliente extends Usuario{
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-    
+
     //Metodos
     @Override
     public void consultarServicio() {
-        
+
     }
-    
+
     public void solicitarTaxi() {
         System.out.println("Ingrese su ubicacion actual:");
         String inicio = sc.nextLine();
-        
+
         System.out.println("Ingrese su destino:");
         String fin = sc.nextLine();
-        
+
         LocalDate fecha = LocalDate.now();
         System.out.println("Fecha actual: " + fecha);
-        
+
         LocalTime hora = LocalTime.now();
         System.out.println("Hora del viaje: " + hora);
-        
-        
+
         System.out.println("Seleccione el tipo de pago (1 - 2):"
-                         + "1. Efectivo"
-                         + "2. Tarjeta de credito");
+                + "1. Efectivo"
+                + "2. Tarjeta de credito");
         String tipo_pago = sc.nextLine();
-        
+
         TipoPago tipo = null;
-        
-        if (tipo_pago.equals("1")){
+
+        if (tipo_pago.equals("1")) {
             tipo = TipoPago.EFECTIVO;
         } else {
             tipo = TipoPago.CREDITO;
         }
-        
+
         System.out.println("Ingrese numero de personas:");
         int cant_pasajeros = sc.nextInt();
         sc.nextLine();
-        
+
         Ruta ruta = new Ruta(inicio, fin);
+<<<<<<< HEAD
         
 <<<<<<< HEAD
-        System.out.println("Desea confirmar su viaje? (SI/NO)");
-        
-        String confrimar  = sc.nextLine().toLowerCase();
-        
-        ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
+=======
 
+>>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
+        System.out.println("Desea confirmar su viaje? (SI/NO)");
+
+<<<<<<< HEAD
 =======
         ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros, conductor);
         if (tipo_pago.equalsIgnoreCase("Tarjeta de credito")) {
             double valor_pagar = servico_taxi.calcular_precio();
         }
 >>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
+=======
+        String confirmar = sc.nextLine().toLowerCase();
+
+        if (confirmar.equals("si")) {
+            ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
+
+            if (tipo_pago.equals("2")) {
+                double valor_pagar = servicio_taxi.calcularPrecio(tipo);
+            }
+        }
+>>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
     }
-    
+
     public void solicitarEcomienda() {
-        //Code here.
+        System.out.println("Ingrese su ubicacion actual: ");
+        String inicio = sc.nextLine();
+
+        System.out.println("Ingrese su destino:");
+        String fin = sc.nextLine();
+
+        LocalDate fecha = LocalDate.now();
+        System.out.println("Fecha actual: " + fecha);
+
+        LocalTime hora = LocalTime.now();
+        System.out.println("Hora del viaje: " + hora);
+
+        System.out.println("Seleccione el tipo de pago (1 - 2):"
+                + "1. Efectivo"
+                + "2. Tarjeta de credito");
+        String tipo_pago = sc.nextLine();
+
+        TipoPago tipo = null;
+
+        if (tipo_pago.equals("1")) {
+            tipo = TipoPago.EFECTIVO;
+        } else {
+            tipo = TipoPago.CREDITO;
+        }
+
+        System.out.println("Seleccione el tipo de encomienda (1 - 2 - 3):"
+                + "1. Documento"
+                + "2. Medicamento"
+                + "3. Ropa");
+        String tipo_enc = sc.nextLine();
+
+        TipoEncomienda enco = null;
+
+        switch (tipo_enc) {
+            case "1":
+                enco = TipoEncomienda.DOCUMENTO;
+                break;
+            case "2":
+                enco = TipoEncomienda.MEDICAMENTO;
+                break;
+            default:
+                enco = TipoEncomienda.ROPA;
+                break;
+        }
+
+        System.out.println("Ingrese la cantidad del productos: ");
+        int cant_prod = sc.nextInt();
+        sc.nextLine();
+
+        Ruta ruta = new Ruta(inicio, fin);
+
+        System.out.println("Desea confirmar su viaje? (SI/NO)");
+
+        String confirmar = sc.nextLine().toLowerCase();
+
+        if (confirmar.equals("si")) {
+            ServicioEncomienda serv_enc = new ServicioEncomienda(ruta, fecha, hora, tipo, 15231, 25695, enco, cant_prod);
+
+            if (tipo_pago.equals("2")) {
+                double valor_pagar = serv_enc.calcularPrecio(tipo);
+            }
+        }
     }
-    
+
     public void solicitarDelivery() {
-        //Code here.
+        System.out.println("Ingrese su ubicacion actual: ");
+        String inicio = sc.nextLine();
+
+        System.out.println("Ingrese su destino:");
+        String fin = sc.nextLine();
+
+        LocalDate fecha = LocalDate.now();
+        System.out.println("Fecha actual: " + fecha);
+
+        LocalTime hora = LocalTime.now();
+        System.out.println("Hora del viaje: " + hora);
+
+        System.out.println("Seleccione el tipo de pago (1 - 2):"
+                + "1. Efectivo"
+                + "2. Tarjeta de credito");
+        String tipo_pago = sc.nextLine();
+
+        TipoPago tipo = null;
+
+        if (tipo_pago.equals("1")) {
+            tipo = TipoPago.EFECTIVO;
+        } else {
+            tipo = TipoPago.CREDITO;
+        }
+
+        System.out.println("Restaurantes disponibles: ");
+        for (int i = 0; i < restaurantes.size(); i++) {
+            System.out.println(Restaurante.get(i).getNombre());
+        }
+
+        System.out.println("Ingrese nombre de restaurante a elegir: ");
+        String rest = sc.nextLine();
+
+        for (int i = 0; i < restaurantes.size(); i++) {
+            if (restaurantes.get(i).getNombre().equals(rest)) {
+                System.out.println(restaurantes.get(i).getMenu());
+            }
+        }
+
+        System.out.println("Ingrese nombre de plato a elegir: ");
+        String plato = sc.nextLine();
+        
+
     }
-    
+
 }

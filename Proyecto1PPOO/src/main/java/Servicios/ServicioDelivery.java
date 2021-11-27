@@ -11,14 +11,14 @@ import java.time.LocalTime;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Marti
  */
-public class ServicioDelivery extends Servicio{
-    
+public class ServicioDelivery extends Servicio {
+
     private Pedido pedido;
+<<<<<<< HEAD
     private int nPlatos;
     
     public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago,
@@ -26,22 +26,34 @@ public class ServicioDelivery extends Servicio{
     super(ruta,fecha,hora,tipoDePago,identificador);
     this.pedido = pedido;
     this.nPlatos = nPlatos;
+=======
+    private String nPlatos;
+
+    public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, int identificador, int nPasajeros, Pedido pedido, String nPlatos) {
+        super(ruta, fecha, hora, tipoDePago, identificador);
+        this.pedido = pedido;
+        this.nPlatos = nPlatos;
+>>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
     }
-    
-     public Pedido getPedido() {
+
+    public Pedido getPedido() {
         return pedido;
     }
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+<<<<<<< HEAD
     
     public int getNPlatos() {
+=======
+
+    public String getNPlatos() {
+>>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
         return nPlatos;
     }
 
     public void setNPlatos(int nPlatos) {
         this.nPlatos = nPlatos;
     }
-    
 }
