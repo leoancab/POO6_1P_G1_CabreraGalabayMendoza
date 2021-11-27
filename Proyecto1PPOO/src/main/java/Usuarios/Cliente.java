@@ -243,6 +243,7 @@ public class Cliente extends Usuario {
         for (int i = 0; i < restaurantes.size(); i++) {
             System.out.println(Restaurante.get(i).getNombre());
         }
+
         System.out.println("Ingrese nombre de restaurante a elegir: ");
         String rest = sc.nextLine();
 
@@ -251,6 +252,11 @@ public class Cliente extends Usuario {
                 System.out.println(restaurantes.get(i).getMenu());
             }
         }
+
+        System.out.println("Ingrese nombre de plato a elegir: ");
+        String plato = sc.nextLine();
+        
+
     }
 
 }
