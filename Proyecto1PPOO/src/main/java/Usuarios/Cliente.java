@@ -233,7 +233,7 @@ public class Cliente extends Usuario {
         return -1;
     }
 
-    public double solicitarDelivery() {
+    public double solicitarDelivery(ArrayList<Restaurante> restaurantes) {
         //Lista de platos pedidos
         ArrayList<Comida> platos = new ArrayList<>();
 
