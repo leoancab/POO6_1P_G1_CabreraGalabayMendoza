@@ -16,8 +16,8 @@ public class Conductor extends Usuario {
     private Vehiculo vehiculo;
 
     public Conductor(int num_lic, Estado estado, Vehiculo vehiculo, 
-            String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
-        super(num_cedula, nombre, apellido, user, contraseña, cedula);
+            String num_celular, String nombre, String apellido, String user, String contraseña, String cedula) {
+        super(num_celular, nombre, apellido, user, contraseña, cedula);
         this.num_lic = num_lic;
         this.estado = estado;
         this.vehiculo = vehiculo;
@@ -37,7 +37,7 @@ public class Conductor extends Usuario {
     }
 
     public String getNum_cedula() {
-        return num_cedula;
+        return num_celular;
     }
 
     public String getNombre() {
@@ -73,8 +73,8 @@ public class Conductor extends Usuario {
         this.vehiculo = vehiculo;
     }
 
-    public void setNum_cedula(String num_cedula) {
-        this.num_cedula = num_cedula;
+    public void setNum_celular(String num_celular) {
+        this.num_celular = num_celular;
     }
 
     public void setNombre(String nombre) {

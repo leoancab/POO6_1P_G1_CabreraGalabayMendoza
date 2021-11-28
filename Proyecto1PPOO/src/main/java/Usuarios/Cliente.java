@@ -40,8 +40,8 @@ public class Cliente extends Usuario {
         return edad;
     }
 
-    public String getNum_cedula() {
-        return num_cedula;
+    public String getNum_celular() {
+        return num_celular;
     }
 
     public String getNombre() {
@@ -73,8 +73,8 @@ public class Cliente extends Usuario {
         this.edad = edad;
     }
 
-    public void setNum_cedula(String num_cedula) {
-        this.num_cedula = num_cedula;
+    public void setNum_celular(String num_celular) {
+        this.num_celular = num_celular;
     }
 
     public void setNombre(String nombre) {
@@ -100,10 +100,11 @@ public class Cliente extends Usuario {
     //Metodos
     @Override
     public void consultarServicio() {
-
+        
     }
 
-    public void solicitarTaxi() {
+    public double solicitarTaxi() {
+        //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual:");
         String inicio = sc.nextLine();
 
@@ -140,15 +141,25 @@ public class Cliente extends Usuario {
         String confirmar = sc.nextLine().toLowerCase();
 
         if (confirmar.equals("si")) {
-            ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros);
+            ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, cant_pasajeros);
 
             if (tipo_pago.equals("2")) {
                 double valor_pagar = servicio_taxi.calcularPrecio(tipo);
+                return valor_pagar;
             }
+            System.out.println("ID: " + Servicio.obtenerIdentificador());
+            System.out.println("Punto de inicio: " + inicio);
+            System.out.println("Punto de llegada: " + fin);
+            System.out.println("Fecha: " + fecha);
+            System.out.println("Hora: " + hora);
+            System.out.println("Cantidad de pasajeros: " + cant_pasajeros);
+
         }
+        return -1;
     }
 
-    public void solicitarEcomienda() {
+    public double solicitarEcomienda() {
+        //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual: ");
         String inicio = sc.nextLine();
 
@@ -205,15 +216,28 @@ public class Cliente extends Usuario {
         String confirmar = sc.nextLine().toLowerCase();
 
         if (confirmar.equals("si")) {
-            ServicioEncomienda serv_enc = new ServicioEncomienda(ruta, fecha, hora, tipo, 15231, 25695, enco, cant_prod);
+            ServicioEncomienda serv_enc = new ServicioEncomienda(ruta, fecha, hora, tipo, Servicio.obtenerIdentificador(), enco, cant_prod);
 
             if (tipo_pago.equals("2")) {
                 double valor_pagar = serv_enc.calcularPrecio(tipo);
+                return valor_pagar;
             }
+            System.out.println("ID: " + Servicio.obtenerIdentificador());
+            System.out.println("Tipo de Encomienda: " + enco);
+            System.out.println("Cantidad de productos: " + cant_prod);
+            System.out.println("Punto de inicio: " + inicio);
+            System.out.println("Punto de llegada: " + fin);
+            System.out.println("Fecha: " + fecha);
+            System.out.println("Hora: " + hora);
         }
+        return -1;
     }
 
-    public void solicitarDelivery() {
+    public double solicitarDelivery() {
+        //Lista de platos pedidos
+        ArrayList<Comida> platos = new ArrayList<>();
+
+        //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual: ");
         String inicio = sc.nextLine();
 
@@ -239,23 +263,69 @@ public class Cliente extends Usuario {
             tipo = TipoPago.CREDITO;
         }
 
+        Ruta ruta = new Ruta(inicio, fin);
+
         System.out.println("Restaurantes disponibles: ");
         for (int i = 0; i < restaurantes.size(); i++) {
-            System.out.println(Restaurante.get(i).getNombre());
+            System.out.println(restaurantes.get(i).getNombre());
         }
 
         System.out.println("Ingrese nombre de restaurante a elegir: ");
         String rest = sc.nextLine();
 
+        /*Mostrar menu del restaurante
+        Se recorre la lista y se comparan los nobres de cada restaurante,
+        tambien se obtiene y se muestra el menu.
+         */
+        ArrayList<Comida> menu = new ArrayList<>();
         for (int i = 0; i < restaurantes.size(); i++) {
             if (restaurantes.get(i).getNombre().equals(rest)) {
-                System.out.println(restaurantes.get(i).getMenu());
+                menu = restaurantes.get(i).getMenu();
+                System.out.println(menu);
             }
         }
 
         System.out.println("Ingrese nombre de plato a elegir: ");
         String plato = sc.nextLine();
 
-    }
+        String ingreso = "SI";
+        do {
+            System.out.println("Ingrese nombre de plato a elegir: ");
+            plato = sc.nextLine().toUpperCase();
 
+            //Agredar plato a la lista de platos pedidos por el cliente.
+            for (Comida p : menu) {
+                if (p.getNombre().equals(plato)) {
+                    platos.add(p);
+                }
+            }
+
+            //Preguntar si se continua agregando mas platos.
+            System.out.println("Desea seguir agregando platos? (SI/NO)");
+            ingreso = sc.nextLine().toUpperCase();
+        } while (ingreso.equals("SI"));
+
+        Pedido pedido = new Pedido(platos);
+
+        System.out.println("Desea confirmar su viaje? (SI/NO)");
+
+        String confirmar = sc.nextLine().toLowerCase();
+
+        if (confirmar.equals("si")) {
+            ServicioDelivery serv_del = new ServicioDelivery(ruta, fecha, hora, tipo, pedido, platos.size(), restaurantes);
+
+            if (tipo_pago.equals("2")) {
+                double valor_pagar = serv_del.calcularPrecio(tipo) + serv_del.calcPrecioPedido(platos);
+                return valor_pagar;
+            }
+            System.out.println("ID: " + Servicio.obtenerIdentificador());
+            System.out.println("Restaurante: " + rest);
+            System.out.println("Pedido: " + pedido);
+            System.out.println("Punto de inicio: " + inicio);
+            System.out.println("Punto de llegada: " + fin);
+            System.out.println("Fecha: " + fecha);
+            System.out.println("Hora: " + hora);
+        }
+        return -1;
+    }
 }

@@ -11,15 +11,15 @@ package Usuarios;
  */
 public abstract class Usuario {
 
-    protected String num_cedula;
+    protected String num_celular;
     protected String nombre;
     protected String apellido;
     protected String user;
     protected String contraseña;
     protected String cedula;
 
-    public Usuario(String num_cedula, String nombre, String apellido, String user, String contraseña, String cedula) {
-        this.num_cedula = num_cedula;
+    public Usuario(String num_celular, String nombre, String apellido, String user, String contraseña, String cedula) {
+        this.num_celular = num_celular;
         this.nombre = nombre;
         this.apellido = apellido;
         this.user = user;

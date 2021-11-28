@@ -17,4 +17,22 @@ public class Ruta {
         this.salida = salida;
         this.destino = destino;
     }
+
+    public String getSalida() {
+        return salida;
+    }
+
+    public void setSalida(String salida) {
+        this.salida = salida;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+    
+    
 }

@@ -2,9 +2,12 @@ package Servicios;
 
 import Usuarios.Ruta;
 import Usuarios.Conductor;
+import Usuarios.Conductor;
 import Usuarios.TipoPago;
+import Usuarios.TipoVehiculo;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,9 +22,9 @@ public class ServicioTaxi extends Servicio {
 
     private int nPasajeros;
 
-    public ServicioTaxi(Ruta ruta, LocalDate fecha, LocalTime hora, 
-            TipoPago tipoDePago, int identificador, int nPasajeros) {
-        super(ruta, fecha, hora, tipoDePago, identificador);
+    public ServicioTaxi(Ruta ruta, LocalDate fecha, LocalTime hora,
+            TipoPago tipoDePago, int nPasajeros) {
+        super(ruta, fecha, hora, tipoDePago);
         this.nPasajeros = nPasajeros;
     }
 
@@ -33,7 +36,13 @@ public class ServicioTaxi extends Servicio {
         this.nPasajeros = nPasajeros;
     }
 
-    public Conductor seleccionarConductor() {
-
+    public Conductor seleccionarCond(ArrayList<Conductor> conductores) {
+        ArrayList<Conductor> cDisp = condDisp(conductores);
+        for (int i = 0; i < cDisp.size(); i++) {
+            if (cDisp.get(i).getVehiculo().equals(TipoVehiculo.AUTO)) {
+                return cDisp.get(i);
+            }
+        }
+        return null;
     }
 }

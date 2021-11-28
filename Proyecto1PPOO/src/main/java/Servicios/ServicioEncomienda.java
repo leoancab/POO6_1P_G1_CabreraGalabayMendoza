@@ -1,10 +1,14 @@
 package Servicios;
 
+import Usuarios.Conductor;
 import Usuarios.Ruta;
 import Usuarios.TipoEncomienda;
 import Usuarios.TipoPago;
+import Usuarios.TipoEncomienda;
+import Usuarios.TipoVehiculo;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,12 +22,12 @@ import java.time.LocalTime;
 public class ServicioEncomienda extends Servicio {
 
     private int nServicio;
-    private String tipoEncomienda;
+    private TipoEncomienda tipoEncomienda;
     private int cantProd;
-
-    public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, 
-            TipoPago tipoDePago, int identificador, int nServicio, TipoEncomienda tipoEncomienda, int cantProd) {
-        super(ruta, fecha, hora, tipoDePago, identificador);
+    
+    public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, 
+            int nServicio, TipoEncomienda tipoEncomienda, int cantProd ){
+        super(ruta,fecha,hora,tipoDePago);
         this.nServicio = nServicio;
         this.cantProd = cantProd;
     }
@@ -34,14 +38,13 @@ public class ServicioEncomienda extends Servicio {
 
     public void setNServicio(int nServicio) {
         this.nServicio = nServicio;
-
     }
-
-    public String getTipoEncomienda() {
+    
+    public TipoEncomienda getTipoEncomienda() {
         return tipoEncomienda;
     }
 
-    public void setNServicio(String tipoEncomienda) {
+    public void setNServicio(TipoEncomienda tipoEncomienda) {
         this.tipoEncomienda = tipoEncomienda;
     }
 
@@ -51,5 +54,17 @@ public class ServicioEncomienda extends Servicio {
 
     public void setCantProd(int cantProd) {
         this.cantProd = cantProd;
+    }
+    
+    @Override
+    public Conductor seleccionarCond(ArrayList<Conductor> conductores) {
+        ArrayList<Conductor> cDisp = condDisp(conductores);
+        for (int i = 0; i < cDisp.size(); i++) {
+            if (cDisp.get(i).getVehiculo().equals(TipoVehiculo.MOTO)) {
+
+                return cDisp.get(i);
+            }
+        }
+        return null;
     }
 }

@@ -1,7 +1,6 @@
 package Servicios;
 
-import Usuarios.Ruta;
-import Usuarios.TipoPago;
+import Usuarios.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +8,7 @@ import Usuarios.TipoPago;
  */
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,14 +20,15 @@ public class Servicio {
     protected LocalDate fecha;
     protected LocalTime hora;
     protected TipoPago tipoDePago;
-    protected int identificador;
+    protected static int identificador = 100;
 
-    public Servicio(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, int identificador) {
+    public Servicio(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago) {
         this.ruta = ruta;
         this.fecha = fecha;
         this.hora = hora;
         this.tipoDePago = tipoDePago;
-        this.identificador = identificador;
+        //this.identificador = 100;
+        identificador++;
     }
 
     public Ruta getRuta() {
@@ -62,12 +63,8 @@ public class Servicio {
         this.tipoDePago = tipoDePago;
     }
 
-    public int getIdentificador() {
+    public static int obtenerIdentificador() {
         return identificador;
-    }
-
-    public void setIdentificador(int identificador) {
-        this.identificador = identificador;
     }
 
     public double calcularPrecio(TipoPago tipoDePago) {
@@ -78,5 +75,20 @@ public class Servicio {
             double pfinal = precio * 0.1 + precio;
             return pfinal;
         }
+    }
+
+    public ArrayList<Conductor> condDisp(ArrayList<Conductor> conductores) {
+        ArrayList<Conductor> cDisponibles = new ArrayList<>();
+        for (int i = 0; i < conductores.size(); i++) {
+            if (conductores.get(i).getEstado().equals(TipoEstado.valueOf("DISPONIBLE"))) {
+                cDisponibles.add(conductores.get(i));
+            }
+        }
+        return cDisponibles;
+    }
+
+    public Conductor seleccionarCond(ArrayList<Conductor> conductores) {
+        //Conductor conductor = new Conductor();
+        return conductores.get(1);
     }
 }

@@ -1,8 +1,11 @@
 package Servicios;
 
-import Restaurantes.Pedido;
+import java.util.ArrayList;
+import Restaurantes.*;
+import Usuarios.Conductor;
 import Usuarios.Ruta;
 import Usuarios.TipoPago;
+import Usuarios.TipoVehiculo;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,12 +21,23 @@ import java.time.LocalTime;
 public class ServicioDelivery extends Servicio {
 
     private Pedido pedido;
-    private String nPlatos;
+    private int nPlatos;
+    private ArrayList<Restaurante> restaurantes;
 
-    public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, int identificador, int nPasajeros, Pedido pedido, String nPlatos) {
-        super(ruta, fecha, hora, tipoDePago, identificador);
+    public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago,
+            Pedido pedido, int nPlatos, ArrayList<Restaurante> restaurantes) {
+        super(ruta, fecha, hora, tipoDePago);
         this.pedido = pedido;
         this.nPlatos = nPlatos;
+        this.restaurantes = restaurantes;
+    }
+
+    public ArrayList<Restaurante> getRestaurantes() {
+        return restaurantes;
+    }
+
+    public void setRestaurantes(ArrayList<Restaurante> restaurantes) {
+        this.restaurantes = restaurantes;
     }
 
     public Pedido getPedido() {
@@ -34,11 +48,30 @@ public class ServicioDelivery extends Servicio {
         this.pedido = pedido;
     }
 
-    public String getNPlatos() {
+    public int getNPlatos() {
         return nPlatos;
     }
 
-    public void setNPlatos(String nPlatos) {
+    public void setNPlatos(int nPlatos) {
         this.nPlatos = nPlatos;
+    }
+
+    public double calcPrecioPedido(ArrayList<Comida> platos) {
+        double precio = 0.0;
+        for (int i = 0; i < platos.size(); i++) {
+            precio += platos.get(i).getPrecio();
+        }
+        return precio;
+    }
+
+    public Conductor seleccionarCond(ArrayList<Conductor> conductores) {
+        ArrayList<Conductor> cDisp = condDisp(conductores);
+        for (int i = 0; i < cDisp.size(); i++) {
+            if (cDisp.get(i).getVehiculo().equals(TipoVehiculo.MOTO)) {
+
+                return cDisp.get(i);
+            }
+        }
+        return null;
     }
 }
