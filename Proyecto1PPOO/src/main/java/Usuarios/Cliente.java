@@ -105,7 +105,7 @@ public class Cliente extends Usuario {
         System.out.println("/**********Servicios Solicitados**********/\n"
                          + "/*                                       */\n"
                          + "/*****************************************/\n");
-        
+        if (servicios.size() > 0) {
         //Se recorre la lista de Servicios del cliente.
         for (Servicio s: servicios) {
             if (s instanceof ServicioTaxi) {
@@ -125,20 +125,23 @@ public class Cliente extends Usuario {
                         + "Hora: " + otro_s.getHora() + "\n"
                         + "Desde: " + otro_s.getRuta().getSalida() + "\n"
                         + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
-            } else {
+            } else if (s instanceof ServicioDelivery) {
                 ServicioDelivery otro_s = (ServicioDelivery) s;
                 System.out.println("Tipo: Viaje\n"
-                        + "Restaurante: " + otro_s.g + "\n"
+                        + "Cantidad de pasajeros: " + otro_s.getRestaurante()+ "\n"
                         + "Fecha: " + otro_s.getFecha() + "\n"
                         + "Hora: " + otro_s.getHora() + "\n"
                         + "Desde: " + otro_s.getRuta().getSalida() + "\n"
                         + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
             }
         }
+        } else {
+            System.out.println("No registra ningun Servico aun.");
+        }
         
     }
 
-    public double solicitarTaxi() {
+    public double solicitarTaxi(ArrayList<Conductor> conductores) {
         //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual:");
         String inicio = sc.nextLine();
@@ -217,7 +220,7 @@ public class Cliente extends Usuario {
         return -1;
     }
 
-    public double solicitarEcomienda() {
+    public double solicitarEcomienda(ArrayList<Conductor> conductores) {
         //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual: ");
         String inicio = sc.nextLine();
@@ -313,7 +316,7 @@ public class Cliente extends Usuario {
         return -1;
     }
 
-    public double solicitarDelivery() {
+    public double solicitarDelivery(ArrayList<Conductor> conductores, ArrayList<Restaurante> restaurantes) {
         //Lista de platos pedidos
         ArrayList<Comida> platos = new ArrayList<>();
 
@@ -358,8 +361,10 @@ public class Cliente extends Usuario {
         tambien se obtiene y se muestra el menu.
          */
         ArrayList<Comida> menu = new ArrayList<>();
+        Restaurante restaurante = null;
         for (int i = 0; i < restaurantes.size(); i++) {
             if (restaurantes.get(i).getNombre().equals(rest)) {
+                restaurante = restaurantes.get(i);
                 menu = restaurantes.get(i).getMenu();
                 System.out.println(menu);
             }
@@ -370,6 +375,7 @@ public class Cliente extends Usuario {
 
         String ingreso = "SI";
         do {
+            //Se solicita al usuario que ngrese el plato que desea ordenar.
             System.out.println("Ingrese nombre de plato a elegir: ");
             plato = sc.nextLine().toUpperCase();
 
@@ -397,7 +403,7 @@ public class Cliente extends Usuario {
         
         if (confirmar.equals("si")) {
             //Se crea el servicio de delivery
-            ServicioDelivery serv_del = new ServicioDelivery(ruta, fecha, hora, tipo, pedido, platos.size(), restaurantes);
+            ServicioDelivery serv_del = new ServicioDelivery(ruta, fecha, hora, tipo, pedido, platos.size(), restaurantes, restaurante);
             //Se agrega el servicio delivery a la lista de servicios del cliente.
             servicios.add(serv_del);
             //Se seleccioan un conductor como moto.
