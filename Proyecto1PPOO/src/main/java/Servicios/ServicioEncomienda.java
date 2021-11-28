@@ -21,30 +21,30 @@ import java.util.ArrayList;
  */
 public class ServicioEncomienda extends Servicio {
 
-    private int nServicio;
+    private static int nServicio = 1223;
     private TipoEncomienda tipoEncomienda;
     private int cantProd;
     
-    public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, 
-            int nServicio, TipoEncomienda tipoEncomienda, int cantProd ){
+    public ServicioEncomienda(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago, TipoEncomienda tipoEncomienda, int cantProd ){
         super(ruta,fecha,hora,tipoDePago);
-        this.nServicio = nServicio;
         this.cantProd = cantProd;
+        nServicio++;
+        
     }
 
     public int getNServicio() {
         return nServicio;
     }
 
-    public void setNServicio(int nServicio) {
-        this.nServicio = nServicio;
-    }
+//    public void setNServicio(int nServicio) {
+//        this.nServicio = nServicio;
+//    }
     
     public TipoEncomienda getTipoEncomienda() {
         return tipoEncomienda;
     }
 
-    public void setNServicio(TipoEncomienda tipoEncomienda) {
+    public void setTipoEncomienda(TipoEncomienda tipoEncomienda) {
         this.tipoEncomienda = tipoEncomienda;
     }
 
@@ -55,6 +55,7 @@ public class ServicioEncomienda extends Servicio {
     public void setCantProd(int cantProd) {
         this.cantProd = cantProd;
     }
+    
     
     @Override
     public Conductor seleccionarCond(ArrayList<Conductor> conductores) {

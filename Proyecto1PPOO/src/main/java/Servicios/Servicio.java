@@ -63,7 +63,7 @@ public class Servicio {
         this.tipoDePago = tipoDePago;
     }
 
-    public static int obtenerIdentificador() {
+    public int getIdentificador() {
         return identificador;
     }
 
