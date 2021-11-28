@@ -255,7 +255,6 @@ public class Cliente extends Usuario {
 
         System.out.println("Ingrese nombre de plato a elegir: ");
         String plato = sc.nextLine();
-        
 
     }
 
