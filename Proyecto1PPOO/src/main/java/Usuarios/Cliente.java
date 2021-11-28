@@ -22,15 +22,7 @@ public class Cliente extends Usuario {
     Scanner sc = new Scanner(System.in);
     private int num_tarjeta_credito;
     private int edad;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     private Conductor conductor;
->>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
-    
-=======
-    private Conductor conductor;
->>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
 
     public Cliente(int num_tarjeta_credito, int edad, String num_cedula,
             String nombre, String apellido, String user, String contraseña, String cedula) {
@@ -142,22 +134,9 @@ public class Cliente extends Usuario {
         sc.nextLine();
 
         Ruta ruta = new Ruta(inicio, fin);
-<<<<<<< HEAD
-        
-<<<<<<< HEAD
-=======
 
->>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
         System.out.println("Desea confirmar su viaje? (SI/NO)");
 
-<<<<<<< HEAD
-=======
-        ServicioTaxi servicio_taxi = new ServicioTaxi(ruta, fecha, hora, tipo, 10202, cant_pasajeros, conductor);
-        if (tipo_pago.equalsIgnoreCase("Tarjeta de credito")) {
-            double valor_pagar = servico_taxi.calcular_precio();
-        }
->>>>>>> b2234bbbe9a038e34a270786c9047bdc1dc62eae
-=======
         String confirmar = sc.nextLine().toLowerCase();
 
         if (confirmar.equals("si")) {
@@ -167,7 +146,6 @@ public class Cliente extends Usuario {
                 double valor_pagar = servicio_taxi.calcularPrecio(tipo);
             }
         }
->>>>>>> b0273cf91c67e151af6684d725baaa5a08e560d1
     }
 
     public void solicitarEcomienda() {
@@ -236,6 +214,9 @@ public class Cliente extends Usuario {
     }
 
     public void solicitarDelivery() {
+        //Lista de platos pedidos
+        ArrayList<Comida> platos = new ArrayList<>();
+        
         System.out.println("Ingrese su ubicacion actual: ");
         String inicio = sc.nextLine();
 
@@ -263,22 +244,39 @@ public class Cliente extends Usuario {
 
         System.out.println("Restaurantes disponibles: ");
         for (int i = 0; i < restaurantes.size(); i++) {
-            System.out.println(Restaurante.get(i).getNombre());
+            System.out.println(restaurantes.get(i).getNombre());
         }
 
         System.out.println("Ingrese nombre de restaurante a elegir: ");
         String rest = sc.nextLine();
-
+        
+        /*Mostrar menu del restaurante
+        Se recorre la lista y se comparan los nobres de cada restaurante,
+        tambien se obtiene y se muestra el menu.
+        */
+        ArrayList<Comida> menu = new ArrayList<>();
         for (int i = 0; i < restaurantes.size(); i++) {
             if (restaurantes.get(i).getNombre().equals(rest)) {
-                System.out.println(restaurantes.get(i).getMenu());
+                menu = restaurantes.get(i).getMenu();
+                System.out.println(menu);
             }
         }
-
-        System.out.println("Ingrese nombre de plato a elegir: ");
-        String plato = sc.nextLine();
-        
-
+        String ingreso = "SI";
+        do {
+            System.out.println("Ingrese nombre de plato a elegir: ");
+            String plato = sc.nextLine().toUpperCase();
+            
+            //Agredar plato a la lista de platos pedidos por el cliente.
+            for (Comida p: menu) {
+                if (p.getNombre().equals(plato)) {
+                    platos.add(p);
+                }
+            }
+            
+            //Preguntar si se continua agregando mas platos.
+            System.out.println("Desea seguir agregando platos? (SI/NO)");
+            ingreso = sc.nextLine().toUpperCase();
+        } while (ingreso.equals("SI"));
     }
 
 }
