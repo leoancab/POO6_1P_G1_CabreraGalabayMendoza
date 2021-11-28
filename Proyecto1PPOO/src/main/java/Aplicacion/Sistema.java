@@ -1,6 +1,5 @@
 package Aplicacion;
 
-
 import Aplicacion.ManejoArchivos;
 
 /*
@@ -13,12 +12,12 @@ import Aplicacion.ManejoArchivos;
  * @author cgala
  */
 public class Sistema {
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ManejoArchivos.LeeFichero("usuarios.txt");
+        //ManejoArchivos.LeeFichero("usuarios.txt");
     }
 
 }
