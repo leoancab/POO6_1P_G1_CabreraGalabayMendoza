@@ -19,16 +19,17 @@ import java.util.ArrayList;
  * @author cgala
  */
 public class Cliente extends Usuario {
+
     private ArrayList<Servicio> servicios = new ArrayList<>();
     private int num_tarjeta_credito;
     private int edad;
     private Conductor conductor;
-    
+
     Scanner sc = new Scanner(System.in);
 
     public Cliente(int num_tarjeta_credito, int edad, String num_cedula,
-            String nombre, String apellido, String user, String contraseña, String cedula) {
-        super(num_cedula, nombre, apellido, user, contraseña, cedula);
+            String nombre, String apellido, String user, String contraseña, String celular, TipoUsuario TipoUsuario) {
+        super(num_cedula, nombre, apellido, user, contraseña, celular, TipoUsuario);
         this.num_tarjeta_credito = num_tarjeta_credito;
         this.edad = edad;
     }
@@ -42,30 +43,6 @@ public class Cliente extends Usuario {
         return edad;
     }
 
-    public String getNum_celular() {
-        return num_celular;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
     //Setters
     public void setNum_tarjeta_credito(int num_tarjeta_credito) {
         this.num_tarjeta_credito = num_tarjeta_credito;
@@ -75,37 +52,15 @@ public class Cliente extends Usuario {
         this.edad = edad;
     }
 
-    public void setNum_celular(String num_celular) {
-        this.num_celular = num_celular;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
     //Metodos
     @Override
     public void consultarServicio() {
         System.out.println("/**********Servicios Solicitados**********/\n"
-                         + "/*                                       */\n"
-                         + "/*****************************************/\n");
+                + "/*                                       */\n"
+                + "/*****************************************/\n");
+
         if (servicios.size() > 0) {
+<<<<<<< HEAD
         //Se recorre la lista de Servicios del cliente.
         for (Servicio s: servicios) {
             if (s instanceof ServicioTaxi) {
@@ -134,12 +89,41 @@ public class Cliente extends Usuario {
                         + "Hora: " + otro_s.getHora() + "\n"
                         + "Desde: " + otro_s.getRuta().getSalida() + "\n"
                         + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
+=======
+            //Se recorre la lista de Servicios del cliente.
+            for (Servicio s : servicios) {
+                if (s instanceof ServicioTaxi) {
+                    ServicioTaxi otro_s = (ServicioTaxi) s;
+                    System.out.println("Tipo: Viaje\n"
+                            + "Cantidad de pasajeros: " + otro_s.getNPasajeros() + "\n"
+                            + "Fecha: " + otro_s.getFecha() + "\n"
+                            + "Hora: " + otro_s.getHora() + "\n"
+                            + "Desde: " + otro_s.getRuta().getSalida() + "\n"
+                            + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+                } else if (s instanceof ServicioEncomienda) {
+                    ServicioEncomienda otro_s = (ServicioEncomienda) s;
+                    System.out.println("Tipo: Encomienda\n"
+                            + "Tipo: " + otro_s.getTipoEncomienda()
+                            + "Cantidad : " + otro_s.getCantProd() + "\n"
+                            + "Fecha: " + otro_s.getFecha() + "\n"
+                            + "Hora: " + otro_s.getHora() + "\n"
+                            + "Desde: " + otro_s.getRuta().getSalida() + "\n"
+                            + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+                } else {
+                    ServicioDelivery otro_s = (ServicioDelivery) s;
+                    System.out.println("Tipo: Viaje\n"
+                            + "Restaurante: " + otro_s.getRestaurante() + "\n"
+                            + "Pedido: " + otro_s.getPedido() + "\n"
+                            + "Fecha: " + otro_s.getFecha() + "\n"
+                            + "Hora: " + otro_s.getHora() + "\n"
+                            + "Desde: " + otro_s.getRuta().getSalida() + "\n"
+                            + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+                }
+>>>>>>> 0b65fd8b12afd9222ff91082e0b59551fdc2f0f9
             }
-        }
         } else {
             System.out.println("No registra ningun Servico aun.");
         }
-        
     }
 
     public double solicitarTaxi(ArrayList<Conductor> conductores) {
@@ -178,7 +162,7 @@ public class Cliente extends Usuario {
         System.out.println("Desea confirmar su viaje? (SI/NO)");
 
         String confirmar = sc.nextLine().toLowerCase();
-        
+
         double valor_pagar = 0;
         Conductor conductor = null;
         if (confirmar.equals("si")) {
@@ -188,24 +172,23 @@ public class Cliente extends Usuario {
             servicios.add(servicio_taxi);
             //Se obtiene a un condcutor disponible y con carro.
             conductor = servicio_taxi.seleccionarCond(conductores);
-            
-            
+
             if (tipo_pago.equals("2")) {
                 valor_pagar = servicio_taxi.calcularPrecio(tipo);
                 //return valor_pagar;
-            } else { 
+            } else {
                 valor_pagar = servicio_taxi.calcularPrecio(tipo);
-                
+
             }
-            
+
             //Se obtiene la información para escribir el archivo
-            String informacion = servicio_taxi.getIdentificador() + "," +
-                    nombre + "," + conductor.getNombre() + " " + ruta.getSalida() + "," + ruta.getDestino()
-                    + ","  + fecha + "," + hora + "," + cant_pasajeros
+            String informacion = servicio_taxi.getIdentificador() + ","
+                    + nombre + "," + conductor.getNombre() + " " + ruta.getSalida() + "," + ruta.getDestino()
+                    + "," + fecha + "," + hora + "," + cant_pasajeros
                     + "," + tipo + valor_pagar;
             //Se genera el viajes.txt
             ManejoArchivos.EscribirArchivo("viajes.txt", informacion);
-            
+
             //Se muestran los detalles del viaje
             System.out.println("ID: " + servicio_taxi.getIdentificador());
             System.out.println("Conductor: " + conductor);
@@ -214,7 +197,7 @@ public class Cliente extends Usuario {
             System.out.println("Fecha: " + fecha);
             System.out.println("Hora: " + hora);
             System.out.println("Cantidad de pasajeros: " + cant_pasajeros);
-            
+
             //Retornar valor
             return valor_pagar;
         }
@@ -277,7 +260,7 @@ public class Cliente extends Usuario {
         System.out.println("Desea confirmar su viaje? (SI/NO)");
 
         String confirmar = sc.nextLine().toLowerCase();
-        
+
         double valor_pagar = 0;
         if (confirmar.equals("si")) {
             //Se crea el servicio de encomienda.
@@ -293,14 +276,14 @@ public class Cliente extends Usuario {
             } else {
                 valor_pagar = serv_enc.calcularPrecio(tipo);
             }
-            
+
             //Se obtiene la información para escribir el archivo
-            String informacion = serv_enc.getNServicio() + "," +
-                    nombre + "," + conductor.getNombre() + " " + ruta.getSalida() + "," + ruta.getDestino()
-                    + ","  + fecha + "," + hora + "," + enco + " " + cant_prod + " " + tipo + " " + valor_pagar;
+            String informacion = serv_enc.getNServicio() + ","
+                    + nombre + "," + conductor.getNombre() + " " + ruta.getSalida() + "," + ruta.getDestino()
+                    + "," + fecha + "," + hora + "," + enco + " " + cant_prod + " " + tipo + " " + valor_pagar;
             //Se genera el encomiendas.txt
             ManejoArchivos.EscribirArchivo("encomiendas.txt", informacion);
-            
+
             //Se muestran los detalles del viaje
             System.out.println("ID: " + serv_enc.calcularPrecio(tipo));
             System.out.println("Conductor: " + conductor.getNombre());
@@ -310,7 +293,7 @@ public class Cliente extends Usuario {
             System.out.println("Punto de llegada: " + fin);
             System.out.println("Fecha: " + fecha);
             System.out.println("Hora: " + hora);
-            
+
             //Se retorna el valor a pagar
             return valor_pagar;
         }
@@ -399,9 +382,9 @@ public class Cliente extends Usuario {
         System.out.println("Desea confirmar su pedido (SI/NO)");
 
         String confirmar = sc.nextLine().toLowerCase();
-        
+
         double valor_pagar = 0;
-        
+
         if (confirmar.equals("si")) {
             //Se crea el servicio de delivery
             ServicioDelivery serv_del = new ServicioDelivery(ruta, fecha, hora, tipo, pedido, platos.size(), restaurantes, restaurante);
@@ -409,33 +392,30 @@ public class Cliente extends Usuario {
             servicios.add(serv_del);
             //Se seleccioan un conductor como moto.
             Conductor conductor = serv_del.seleccionarCond(conductores);
-            
+
             if (tipo_pago.equals("2")) {
                 valor_pagar = serv_del.calcularPrecio(tipo) + serv_del.calcPrecioPedido(platos);
                 //return valor_pagar;
             } else {
                 valor_pagar = serv_del.calcularPrecio(tipo) + serv_del.calcPrecioPedido(platos);
             }
-            
+
             //Se obtiene la información para escribir el archivo
-            String informacion = serv_del.getIdentificador() + "," +
-                    nombre + "," + conductor.getNombre() + " " + ruta.getSalida() + "," + ruta.getDestino()
-                    + ","  + fecha + "," + hora + "," + serv_del.getIdentificador() + " " + tipo + " " + valor_pagar;
+            String informacion = serv_del.getIdentificador() + ","
+                    + nombre + "," + conductor.getNombre() + " " + ruta.getSalida() + "," + ruta.getDestino()
+                    + "," + fecha + "," + hora + "," + serv_del.getIdentificador() + " " + tipo + " " + valor_pagar;
             //Se genera el delivery.txt
             ManejoArchivos.EscribirArchivo("delivery.txt", informacion);
-            
+
             /*Se genera el archivo de pedidos.
             Se recorre la lista de pedidos del cliente y se obtienen la
             informacion necesaria de cada plato.*/
-            
-            for (Comida p: pedido.getOpSeleccionadas()) {
-                String info_pedido = serv_del.getIdentificador() + "," +
-                    p.getNombre() + " " + p.getPrecio();
+            for (Comida p : pedido.getOpSeleccionadas()) {
+                String info_pedido = serv_del.getIdentificador() + ","
+                        + p.getNombre() + " " + p.getPrecio();
                 ManejoArchivos.EscribirArchivo("delivery.txt", info_pedido);
             }
-            
-            
-            
+
             //Se muestran los detalles del viaje
             System.out.println("ID: " + serv_del.getIdentificador());
             System.out.println("Conductor: " + conductor.getNombre());
@@ -445,10 +425,20 @@ public class Cliente extends Usuario {
             System.out.println("Punto de llegada: " + fin);
             System.out.println("Fecha: " + fecha);
             System.out.println("Hora: " + hora);
-            
+
             //Se retorna el valor a pagar
             return valor_pagar;
         }
         return -1;
+    }
+    /*
+    public Cliente obtenerCliente(Usuario usuario){
+        String cedula = usuario.getNum_cedula();
+        Cliente cliente = new Cliente(getNum_tarjeta_credito(),getEdad(),getNum_cedula(),getNombre(),getApellido(),getUser(),getContraseña(),getCelular(),getTipoUsuario());
+        return cliente;
+    }
+    */
+    public String toSring(){
+        return num_cedula+","+edad+","+num_tarjeta_credito;
     }
 }
