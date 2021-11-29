@@ -127,8 +127,9 @@ public class Cliente extends Usuario {
                         + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
             } else if (s instanceof ServicioDelivery) {
                 ServicioDelivery otro_s = (ServicioDelivery) s;
-                System.out.println("Tipo: Viaje\n"
-                        + "Cantidad de pasajeros: " + otro_s.getRestaurante()+ "\n"
+                System.out.println("Tipo: Delivery\n"
+                        + "Restaurante: " + otro_s.getRestaurante()+ "\n"
+                        + "Pedido: " + otro_s.getPedido()
                         + "Fecha: " + otro_s.getFecha() + "\n"
                         + "Hora: " + otro_s.getHora() + "\n"
                         + "Desde: " + otro_s.getRuta().getSalida() + "\n"

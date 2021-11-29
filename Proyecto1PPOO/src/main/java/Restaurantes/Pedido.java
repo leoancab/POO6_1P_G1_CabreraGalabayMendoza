@@ -26,4 +26,14 @@ public class Pedido {
     public void setOpSeleccionadas(ArrayList<Comida> opSeleccionadas) {
         this.opSeleccionadas = opSeleccionadas;
     }
+    
+    @Override
+    public String toString() {
+        ArrayList<String> pedidos = new ArrayList<>();
+        for (Comida c: opSeleccionadas) {
+            pedidos.add(c.getNombre());
+        }
+        return String.join(", ", pedidos);
+    }
+    
 }

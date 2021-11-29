@@ -1,8 +1,4 @@
 package Aplicacion;
-
-
-import Aplicacion.ManejoArchivos;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,6 +15,7 @@ public class Sistema {
      */
     public static void main(String[] args) {
         ManejoArchivos.LeeFichero("usuarios.txt");
+        ManejoArchivos.LeeFichero("archivo.txt");
     }
 
 }
