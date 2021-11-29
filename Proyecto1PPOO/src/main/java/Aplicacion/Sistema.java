@@ -74,15 +74,38 @@ public class Sistema {
 
         for (int i = 0; i < tipoUsuarios.size(); i++) {
             if (tipoUsuarios.get(i).equals(TipoUsuario.C)) {
-                if (ManejoArchivos.LeeFichero("clientes.txt").isEmpty()) {
+                if (!clientes.get(i).getUser().equals(users.get(i))){
                     System.out.println("Ingrese edad: ");
-                    String edad = sc.nextLine();
-                    System.out.println("Tarjeta de credito");
-                    String tarjeta_credito = sc.nextLine();
-                    Cliente c1 = (Cliente) usuarios.get(i);
-                    ManejoArchivos.EscribirArchivo("clientes.txt", c1.toString());
-                } 
+                    int edad = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Ingrese tarjeta de credito: ");
+                    String tarjetaCredito = sc.nextLine();
+                    ManejoArchivos.EscribirArchivo("clientes.txt",usuarios.get(i).getNum_cedula()+","+edad+","+tarjetaCredito);
+                }
             }
+        }
+        
+        System.out.println("/*****MENU*****/"
+                        +"\n/*                              *"
+                        +"\n/************/");
+        System.out.println("1. Solicitar servicio de taxi\n"
+                         + "2. Solicitar comida a domicilio\n"
+                         + "3. Solicitar entrega encomienda\n"
+                         + "4. Consultar Servicios");
+        System.out.println("Ingrese una opcion: ");
+        String opcion = sc.nextLine();
+        switch(opcion){
+            case "1":
+                cliente.servicioTaxi();
+                break;
+            case "2":
+                cliente.servicioDelivery();
+                break;
+            case "3":
+                cliente.servicioEncomienda();
+                break;
+            case "4":
+                cliente.consultarServicio();
         }
 
     }
