@@ -23,13 +23,15 @@ public class ServicioDelivery extends Servicio {
     private Pedido pedido;
     private int nPlatos;
     private ArrayList<Restaurante> restaurantes;
+    private Restaurante restaurante;
 
     public ServicioDelivery(Ruta ruta, LocalDate fecha, LocalTime hora, TipoPago tipoDePago,
-            Pedido pedido, int nPlatos, ArrayList<Restaurante> restaurantes) {
+            Pedido pedido, int nPlatos, ArrayList<Restaurante> restaurantes, Restaurante restaurante) {
         super(ruta, fecha, hora, tipoDePago);
         this.pedido = pedido;
         this.nPlatos = nPlatos;
         this.restaurantes = restaurantes;
+        this.restaurante = restaurante;
     }
 
     public ArrayList<Restaurante> getRestaurantes() {
@@ -64,6 +66,13 @@ public class ServicioDelivery extends Servicio {
         return precio;
     }
 
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+    
+    
+
+    @Override
     public Conductor seleccionarCond(ArrayList<Conductor> conductores) {
         ArrayList<Conductor> cDisp = condDisp(conductores);
         for (int i = 0; i < cDisp.size(); i++) {

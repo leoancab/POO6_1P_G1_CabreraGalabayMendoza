@@ -28,8 +28,8 @@ public class Cliente extends Usuario {
     Scanner sc = new Scanner(System.in);
 
     public Cliente(int num_tarjeta_credito, int edad, String num_cedula,
-            String nombre, String apellido, String user, String contraseña, String cedula) {
-        super(num_cedula, nombre, apellido, user, contraseña, cedula);
+            String nombre, String apellido, String user, String contraseña, String celular, TipoUsuario TipoUsuario) {
+        super(num_cedula, nombre, apellido, user, contraseña, celular, TipoUsuario);
         this.num_tarjeta_credito = num_tarjeta_credito;
         this.edad = edad;
     }
@@ -43,30 +43,6 @@ public class Cliente extends Usuario {
         return edad;
     }
 
-    public String getNum_celular() {
-        return num_celular;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
     //Setters
     public void setNum_tarjeta_credito(int num_tarjeta_credito) {
         this.num_tarjeta_credito = num_tarjeta_credito;
@@ -76,30 +52,6 @@ public class Cliente extends Usuario {
         this.edad = edad;
     }
 
-    public void setNum_celular(String num_celular) {
-        this.num_celular = num_celular;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
     //Metodos
     @Override
     public void consultarServicio() {
@@ -107,39 +59,43 @@ public class Cliente extends Usuario {
                 + "/*                                       */\n"
                 + "/*****************************************/\n");
 
-        //Se recorre la lista de Servicios del cliente.
-        for (Servicio s : servicios) {
-            if (s instanceof ServicioTaxi) {
-                ServicioTaxi otro_s = (ServicioTaxi) s;
-                System.out.println("Tipo: Viaje\n"
-                        + "Cantidad de pasajeros: " + otro_s.getNPasajeros() + "\n"
-                        + "Fecha: " + otro_s.getFecha() + "\n"
-                        + "Hora: " + otro_s.getHora() + "\n"
-                        + "Desde: " + otro_s.getRuta().getSalida() + "\n"
-                        + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
-            } else if (s instanceof ServicioEncomienda) {
-                ServicioEncomienda otro_s = (ServicioEncomienda) s;
-                System.out.println("Tipo: Encomienda\n"
-                        + "Tipo: " + otro_s.getTipoEncomienda()
-                        + "Cantidad : " + otro_s.getCantProd() + "\n"
-                        + "Fecha: " + otro_s.getFecha() + "\n"
-                        + "Hora: " + otro_s.getHora() + "\n"
-                        + "Desde: " + otro_s.getRuta().getSalida() + "\n"
-                        + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
-            } else {
-                ServicioDelivery otro_s = (ServicioDelivery) s;
-                System.out.println("Tipo: Viaje\n"
-                        + "Restaurante: " + otro_s.getRestaurantes() + "\n"
-                        + "Fecha: " + otro_s.getFecha() + "\n"
-                        + "Hora: " + otro_s.getHora() + "\n"
-                        + "Desde: " + otro_s.getRuta().getSalida() + "\n"
-                        + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+        if (servicios.size() > 0) {
+            //Se recorre la lista de Servicios del cliente.
+            for (Servicio s : servicios) {
+                if (s instanceof ServicioTaxi) {
+                    ServicioTaxi otro_s = (ServicioTaxi) s;
+                    System.out.println("Tipo: Viaje\n"
+                            + "Cantidad de pasajeros: " + otro_s.getNPasajeros() + "\n"
+                            + "Fecha: " + otro_s.getFecha() + "\n"
+                            + "Hora: " + otro_s.getHora() + "\n"
+                            + "Desde: " + otro_s.getRuta().getSalida() + "\n"
+                            + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+                } else if (s instanceof ServicioEncomienda) {
+                    ServicioEncomienda otro_s = (ServicioEncomienda) s;
+                    System.out.println("Tipo: Encomienda\n"
+                            + "Tipo: " + otro_s.getTipoEncomienda()
+                            + "Cantidad : " + otro_s.getCantProd() + "\n"
+                            + "Fecha: " + otro_s.getFecha() + "\n"
+                            + "Hora: " + otro_s.getHora() + "\n"
+                            + "Desde: " + otro_s.getRuta().getSalida() + "\n"
+                            + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+                } else {
+                    ServicioDelivery otro_s = (ServicioDelivery) s;
+                    System.out.println("Tipo: Viaje\n"
+                            + "Restaurante: " + otro_s.getRestaurante() + "\n"
+                            + "Pedido: " + otro_s.getPedido() + "\n"
+                            + "Fecha: " + otro_s.getFecha() + "\n"
+                            + "Hora: " + otro_s.getHora() + "\n"
+                            + "Desde: " + otro_s.getRuta().getSalida() + "\n"
+                            + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
+                }
             }
+        } else {
+            System.out.println("No registra ningun Servico aun.");
         }
-
     }
 
-    public double solicitarTaxi() {
+    public double solicitarTaxi(ArrayList<Conductor> conductores) {
         //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual:");
         String inicio = sc.nextLine();
@@ -217,7 +173,7 @@ public class Cliente extends Usuario {
         return -1;
     }
 
-    public double solicitarEcomienda() {
+    public double solicitarEcomienda(ArrayList<Conductor> conductores) {
         //Se pide ubicacion de origen
         System.out.println("Ingrese su ubicacion actual: ");
         String inicio = sc.nextLine();
@@ -313,7 +269,7 @@ public class Cliente extends Usuario {
         return -1;
     }
 
-    public double solicitarDelivery(ArrayList<Restaurante> restaurantes) {
+    public double solicitarDelivery(ArrayList<Conductor> conductores, ArrayList<Restaurante> restaurantes) {
         //Lista de platos pedidos
         ArrayList<Comida> platos = new ArrayList<>();
 
@@ -358,8 +314,10 @@ public class Cliente extends Usuario {
         tambien se obtiene y se muestra el menu.
          */
         ArrayList<Comida> menu = new ArrayList<>();
+        Restaurante restaurante = null;
         for (int i = 0; i < restaurantes.size(); i++) {
             if (restaurantes.get(i).getNombre().equals(rest)) {
+                restaurante = restaurantes.get(i);
                 menu = restaurantes.get(i).getMenu();
                 System.out.println(menu);
             }
@@ -370,6 +328,7 @@ public class Cliente extends Usuario {
 
         String ingreso = "SI";
         do {
+            //Se solicita al usuario que ngrese el plato que desea ordenar.
             System.out.println("Ingrese nombre de plato a elegir: ");
             plato = sc.nextLine().toUpperCase();
 
@@ -397,7 +356,7 @@ public class Cliente extends Usuario {
 
         if (confirmar.equals("si")) {
             //Se crea el servicio de delivery
-            ServicioDelivery serv_del = new ServicioDelivery(ruta, fecha, hora, tipo, pedido, platos.size(), restaurantes);
+            ServicioDelivery serv_del = new ServicioDelivery(ruta, fecha, hora, tipo, pedido, platos.size(), restaurantes, restaurante);
             //Se agrega el servicio delivery a la lista de servicios del cliente.
             servicios.add(serv_del);
             //Se seleccioan un conductor como moto.
@@ -440,5 +399,15 @@ public class Cliente extends Usuario {
             return valor_pagar;
         }
         return -1;
+    }
+    /*
+    public Cliente obtenerCliente(Usuario usuario){
+        String cedula = usuario.getNum_cedula();
+        Cliente cliente = new Cliente(getNum_tarjeta_credito(),getEdad(),getNum_cedula(),getNombre(),getApellido(),getUser(),getContraseña(),getCelular(),getTipoUsuario());
+        return cliente;
+    }
+    */
+    public String toSring(){
+        return num_cedula+","+edad+","+num_tarjeta_credito;
     }
 }

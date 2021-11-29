@@ -16,6 +16,7 @@ public class Restaurante {
     private int cod;
     private String nombre;
     private ArrayList<Comida> menu;
+    
 
     public Restaurante(int cod, String nombre, ArrayList<Comida> menu) {
         this.cod = cod;
