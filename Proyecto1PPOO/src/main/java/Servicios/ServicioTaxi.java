@@ -40,14 +40,10 @@ public class ServicioTaxi extends Servicio {
     public Conductor seleccionarCond(ArrayList<Conductor> conductores) {
         ArrayList<Conductor> cDisp = condDisp(conductores);
         for (int i = 0; i < cDisp.size(); i++) {
-            if (cDisp.get(i).getVehiculo().equals(TipoVehiculo.AUTO)) {
+            if (cDisp.get(i).getVehiculo().equals(TipoVehiculo.valueOf("AUTO"))) {
                 return cDisp.get(i);
             }
         }
         return null;
     }
-<<<<<<< HEAD
-    }
-=======
 }
->>>>>>> 0b65fd8b12afd9222ff91082e0b59551fdc2f0f9

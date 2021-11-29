@@ -60,36 +60,6 @@ public class Cliente extends Usuario {
                 + "/*****************************************/\n");
 
         if (servicios.size() > 0) {
-<<<<<<< HEAD
-        //Se recorre la lista de Servicios del cliente.
-        for (Servicio s: servicios) {
-            if (s instanceof ServicioTaxi) {
-                ServicioTaxi otro_s = (ServicioTaxi) s;
-                System.out.println("Tipo: Viaje\n"
-                        + "Cantidad de pasajeros: " + otro_s.getNPasajeros() + "\n"
-                        + "Fecha: " + otro_s.getFecha() + "\n"
-                        + "Hora: " + otro_s.getHora() + "\n"
-                        + "Desde: " + otro_s.getRuta().getSalida() + "\n"
-                        + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
-            } else if (s instanceof ServicioEncomienda) { 
-                ServicioEncomienda otro_s = (ServicioEncomienda) s;
-                System.out.println("Tipo: Encomienda\n"
-                        + "Tipo: " + otro_s.getTipoEncomienda()
-                        + "Cantidad : " + otro_s.getCantProd() + "\n"
-                        + "Fecha: " + otro_s.getFecha() + "\n"
-                        + "Hora: " + otro_s.getHora() + "\n"
-                        + "Desde: " + otro_s.getRuta().getSalida() + "\n"
-                        + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
-            } else if (s instanceof ServicioDelivery) {
-                ServicioDelivery otro_s = (ServicioDelivery) s;
-                System.out.println("Tipo: Delivery\n"
-                        + "Restaurante: " + otro_s.getRestaurante()+ "\n"
-                        + "Pedido: " + otro_s.getPedido()
-                        + "Fecha: " + otro_s.getFecha() + "\n"
-                        + "Hora: " + otro_s.getHora() + "\n"
-                        + "Desde: " + otro_s.getRuta().getSalida() + "\n"
-                        + "Hasta: " + otro_s.getRuta().getDestino()+ "\n");
-=======
             //Se recorre la lista de Servicios del cliente.
             for (Servicio s : servicios) {
                 if (s instanceof ServicioTaxi) {
@@ -109,9 +79,9 @@ public class Cliente extends Usuario {
                             + "Hora: " + otro_s.getHora() + "\n"
                             + "Desde: " + otro_s.getRuta().getSalida() + "\n"
                             + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
-                } else {
+                } else if (s instanceof ServicioDelivery){
                     ServicioDelivery otro_s = (ServicioDelivery) s;
-                    System.out.println("Tipo: Viaje\n"
+                    System.out.println("Tipo: Delivery\n"
                             + "Restaurante: " + otro_s.getRestaurante() + "\n"
                             + "Pedido: " + otro_s.getPedido() + "\n"
                             + "Fecha: " + otro_s.getFecha() + "\n"
@@ -119,7 +89,6 @@ public class Cliente extends Usuario {
                             + "Desde: " + otro_s.getRuta().getSalida() + "\n"
                             + "Hasta: " + otro_s.getRuta().getDestino() + "\n");
                 }
->>>>>>> 0b65fd8b12afd9222ff91082e0b59551fdc2f0f9
             }
         } else {
             System.out.println("No registra ningun Servico aun.");
@@ -172,6 +141,8 @@ public class Cliente extends Usuario {
             servicios.add(servicio_taxi);
             //Se obtiene a un condcutor disponible y con carro.
             conductor = servicio_taxi.seleccionarCond(conductores);
+            //Asignaos el servicio creado al conductor designado.
+            conductor.setServ_asginado(servicio_taxi);
 
             if (tipo_pago.equals("2")) {
                 valor_pagar = servicio_taxi.calcularPrecio(tipo);
@@ -269,6 +240,8 @@ public class Cliente extends Usuario {
             servicios.add(serv_enc);
             //Se selecciona un conductor con moto.
             conductor = serv_enc.seleccionarCond(conductores);
+            //Asignaos el servicio creado al conductor designado.
+            conductor.setServ_asginado(serv_enc);
 
             if (tipo_pago.equals("2")) {
                 valor_pagar = serv_enc.calcularPrecio(tipo);
@@ -392,6 +365,8 @@ public class Cliente extends Usuario {
             servicios.add(serv_del);
             //Se seleccioan un conductor como moto.
             Conductor conductor = serv_del.seleccionarCond(conductores);
+            //Asignaos el servicio creado al conductor designado.
+            conductor.setServ_asginado(serv_del);
 
             if (tipo_pago.equals("2")) {
                 valor_pagar = serv_del.calcularPrecio(tipo) + serv_del.calcPrecioPedido(platos);
